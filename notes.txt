@@ -1,0 +1,26 @@
+Starting micropython:
+https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/intro.html
+
+esptool is for flashing esp firmware:
+sudo pip3 install esptool
+
+List all tty connections:
+ls /sys/class/tty/
+
+Erase fw and flash micropython:
+sudo esptool.py --port /dev/ttyUSB0 erase_flash
+sudo esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size=detect 0 esp8266-20170612-v1.9.1.bin
+
+Use picocom or minicom for terminal emulator:
+sudo picocom /dev/ttyUSB0 -b 115200
+
+To exit picocom:
+C-a-x
+
+What fixed connection:
+reset a few times after connection, then try enter
+
+sudo ampy --port /dev/ttyUSB0 put main.py
+
+
+boot.py is ran first, then main.py
