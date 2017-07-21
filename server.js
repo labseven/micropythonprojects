@@ -1,17 +1,15 @@
-require('net').createServer(function (socket) {
-    console.log("connected");
+PORT = 80
 
-    socket.write('hi');
+const express = require('express');
+const SocketServer = require('ws').Server;
 
-    socket.on('data', function (data) {
-        console.log(data.toString());
-    });
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-    // socket.end();
-})
+const wss = new SocketServer({ server });
 
-.listen(80);
-
-
-
-console.log('running server');
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('close', () => console.log('Client disconnected'));
+});
