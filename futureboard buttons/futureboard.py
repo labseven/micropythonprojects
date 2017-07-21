@@ -1,7 +1,6 @@
 import socket
 import machine
 import time
-import urequests
 
 
 def connect(ip, port):
@@ -23,7 +22,6 @@ print('running futureboard')
 # s = connect("192.168.34.91", 80)
 
 pin = machine.Pin(0, machine.Pin.IN, machine.Pin.PULL_UP)
-
 lastPinVal = pin.value();
 
 messageQueue = []
