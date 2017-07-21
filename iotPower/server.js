@@ -1,24 +1,23 @@
-PORT = 80;
+PORT = 4444;
 
-const express    = require('express');
-const app        = express();
+const server = require('net').createServer((socket) => {
+  console.log("connected");
+  socket.setEncoding('utf8');
+  socket.setNoDelay();
 
-const http = require('http').Server(app);
+
+  socket.on('data', (data) => { console.log(data); });
+
+  setInterval(() => {
+    sendValue(socket);
+  }, 1000);
+}).listen(PORT);
 
 
-app.get('/*', sendHi);
-app.get('/', sendHi);
-
-app.post('/upvote', function (req, res) {
-  console.log('upvoted');
-  res.send('successful upvote');
-})
-
-function sendHi(req, res) {
-  // res.redirect(307, 'https://futureboard.olin.build');
-  res.send('Hi')
+function sendValue(socket) {
+  value = (Date.now()%2).toString();
+  console.log('sending', value);
+  socket.write(value);
 }
 
-
-http.listen(PORT);
 console.log('server running on', PORT);

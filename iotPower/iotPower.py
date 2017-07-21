@@ -21,26 +21,32 @@ def connect(host, port):
 	print('connected to', addr)
 	return s
 
-def setupPins():
-    for relayPin in relayPins:
-        relays.append(machine.Pin(relayPin, machine.Pin.OUT))
-
-    for buttonPin in buttonPins:
-        buttons.append(machine.Pin(buttonPin, machine.Pin.IN))
-
-
 def recieve(s):
     data_str = ""
     while True:
+        print('recieving')
+        print(data_str)
         data = s.recv(128)
         if data:
-            data_str.append(str(data, 'utf8'))
+            data_str += str(data, 'utf8')
+            # print(str(data, 'utf8'))
         else:
             break
+    print('transmision over')
     return data_str
+
+
+# Setup pins
+for relayPin in relayPins:
+    relays.append(machine.Pin(relayPin, machine.Pin.OUT))
+
+for buttonPin in buttonPins:
+    buttons.append(machine.Pin(buttonPin, machine.Pin.IN))
+
 
 s = connect('labseven.space', 4444)
 
+print(relays)
 
 while True:
     msg = recieve(s)
