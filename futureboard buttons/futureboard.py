@@ -14,10 +14,10 @@ def connect(ip, port):
 def sendMessage(msg):
 	s.sendall(msg)
 
-print('running futureboard.py')
+print('running futureboard')
 
  # "labseven.space"
-s = connect("10.25.9.138", 80)
+s = connect("192.168.34.91", 80)
 
 pin = machine.Pin(0, machine.Pin.IN, machine.Pin.PULL_UP)
 
