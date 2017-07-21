@@ -7,10 +7,10 @@ require('net').createServer(function (socket) {
         console.log(data.toString());
     });
 
-    socket.end();
+    // socket.end();
 })
 
-.listen(1444);
+.listen(80);
 
 
 
