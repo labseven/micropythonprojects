@@ -1,13 +1,16 @@
-def do_connect():
-    import network
+import network
+from config import wifisettings
+
+def connect(name, passwd):
     sta_if = network.WLAN(network.STA_IF)
     if not sta_if.isconnected():
         print('connecting to network...')
         sta_if.active(True)
-        sta_if.connect('OLIN-GUEST', 'The_Phoenix_Flies')
+        sta_if.connect(name, passwd)
         while not sta_if.isconnected():
             pass
     print('network config:', sta_if.ifconfig())
+    return sta_if
 
-
-# do_connect()
+def connectOlin():
+    connect(wifisettings.ssid, wifisettings.passwd)

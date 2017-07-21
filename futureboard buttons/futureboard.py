@@ -1,27 +1,23 @@
 import socket
 import machine
 import time
-import writeToLCD
 
-oled = writeToLCD.connectToDisplay()
-
-def connectSocket(ip, port):
+def connect(ip, port):
 	s = socket.socket()
 	addr_info = socket.getaddrinfo(ip, port)
 	addr = addr_info[0][-1]
 	s.connect(addr)
-	# s.listen(1)
 
-	return s
 	print('connected to', addr)
+	return s
 
 def sendMessage(msg):
 	s.sendall(msg)
 
-print('running testSocket.py')
+print('running futureboard.py')
 
  # "labseven.space"
-s = connectSocket("163.172.150.171", 1444)
+s = connect("10.25.9.138", 80)
 
 pin = machine.Pin(0, machine.Pin.IN, machine.Pin.PULL_UP)
 
@@ -36,26 +32,11 @@ while True:
 		if(pin.value()):
 			print('button pressed')
 			messageQueue.append(1)
-			oled.fill(1)
-			oled.show()
-			time.sleep(.15)
-			oled.fill(0)
-			oled.text(' :D :D :D :D :D :D :D :D', 0, 0)
-			oled.text('Button Pressed', 0, 12)
-			oled.show()
 
-		else:
-			oled.fill(0)
-			oled.show()
-
-	else:
-		oled.text('              .', 0, 0)
-		oled.scroll(-1, 0)
-		oled.show()
 
 
 	if(len(messageQueue) > 0):
-		sendMessage("Button Pressed")
+		sendMessage("Button: +1")
 		messageQueue.pop()
 
 
