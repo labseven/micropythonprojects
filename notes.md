@@ -57,7 +57,7 @@ Driven by ssd1306. 128 x 64
 Adafruit driver: https://github.com/adafruit/micropython-adafruit-ssd1306
 import ssd1306
 import machine
-i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4))
+i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4)) (On D1 Mini: SCL: D1, SDA: D2)
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 oled.fill(0)
 oled.text("hi", x, y*10)

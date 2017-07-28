@@ -39,3 +39,5 @@ while True:
 
     else:
         print('.', end='')
+
+	time.sleep(.01)

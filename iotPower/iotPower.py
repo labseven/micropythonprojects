@@ -56,6 +56,6 @@ while True:
     else:
         relays[0].value(1)
 
-    print('.', end='')
-
+    # print('.', end='')
+    s = connect('labseven.space', 4444)
     time.sleep(.01)

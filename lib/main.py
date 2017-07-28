@@ -5,4 +5,5 @@ print('main.py')
 # import draw_circles
 # import recieve_socket
 # import futureboard
-import iotPower
+# import iotPower
+import buttonLCD
